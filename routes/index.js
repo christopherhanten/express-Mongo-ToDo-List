@@ -1,3 +1,7 @@
+var mongoose = require("mongoose");
+mongoose.connect("mongodb://localhost/todo");
+
+module.exports.todo = require("./todo.js");
 var express = require('express');
 var router = express.Router();
 
@@ -7,3 +11,4 @@ router.get('/', function(req, res, next) {
 });
 
 module.exports = router;
+module.exports = require("./todo.js");

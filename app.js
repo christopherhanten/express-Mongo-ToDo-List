@@ -1,17 +1,18 @@
 var mongoose = require('mongoose');
-  mongoose.connect('mongodb://localhost/todo-app-demo');
+  mongoose.connect('mongodb://localhost/todo-app');
 
 var express = require('express');
-var path = require('path');
+var path    = require('path');
 var favicon = require('serve-favicon');
-var logger = require('morgan');
+var logger  = require('morgan');
 var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
+var bodyParser   = require('body-parser');
 
+var app   = express();
 var index = require('./routes/index');
 var users = require('./routes/users');
+var todo  = require('./models/todo');
 
-var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -25,7 +26,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', index);
+app.get('/', function (req, res) {
+  res.sendFile('views/index.html' , { root : __dirname});
+});
 app.use('/users', users);
 
 // catch 404 and forward to error handler
@@ -45,5 +48,10 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+app.listen(3000, ()=> {
+  console.log(`App is locked and loaded on ${port}`);
+});
+
 
 module.exports = app;
