@@ -6,6 +6,6 @@ var TodoSchema = new Schema({
   description: String
 });
 
-var todo = mongoose.models('todo', TodoSchema);
+var todo = mongoose.model('todo', TodoSchema);
 
-module.exports.todo = '/todo.js';
+module.exports.Todo = '/todo.js';

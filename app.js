@@ -8,9 +8,15 @@ var logger  = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser   = require('body-parser');
 
+var db = require('/models')
+
 var app   = express();
+///////////Routes///////////////
+app.get('/', function (req, res) {
+  res.sendFile('views/index.html' , { root : __dirname});
+});
 var index = require('./routes/index');
-var users = require('./routes/users');
+//var users = require('./routes/users');
 var todo  = require('./models/todo');
 
 
@@ -49,9 +55,18 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-app.listen(3000, ()=> {
+//initialize variable to use for our environment port
+var port= 3000;
+
+app.listen(port, ()=> {
   console.log(`App is locked and loaded on ${port}`);
 });
 
 
 module.exports = app;
+
+// db.todo.insert ({
+//   task       : "clean the glass",
+//   description: "use the dang ole windex",
+//   dateAdded  : "01/09/2017"
+// })
